@@ -15,6 +15,7 @@ import {registerLocaleData} from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import {NgZorroAntdModule, NzBadgeModule, NzDropDownModule, NzIconModule} from 'ng-zorro-antd';
+import { ModalComponent } from './modal/modal.component';
 
 registerLocaleData(zh);
 
@@ -24,7 +25,8 @@ registerLocaleData(zh);
     Code404Component,
     LoginComponent,
     UserHomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

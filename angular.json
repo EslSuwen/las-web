@@ -40,7 +40,7 @@
               "node_modules/angular-bootstrap-md/assets/scss/bootstrap/bootstrap.scss",
               "node_modules/angular-bootstrap-md/assets/scss/mdb.scss",
               "node_modules/animate.css/animate.css",
-              "../node_modules/ng-zorro-antd/src/ng-zorro-antd.less",
+              "node_modules/ng-zorro-antd/src/ng-zorro-antd.less",
               "src/theme.less",
               "src/styles.scss"
             ],

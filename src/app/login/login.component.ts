@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {environment} from '../../environments/environment';
 import {AuthenticationService} from '../service/authentication.service';
+import {ModalComponent} from '../modal/modal.component';
 
 @Component({
   selector: 'app-login',
@@ -11,10 +12,14 @@ import {AuthenticationService} from '../service/authentication.service';
 })
 export class LoginComponent implements OnInit {
 
+  @ViewChild('register', {static: true}) register: ModalComponent;
+  @ViewChild('registered', {static: true}) registered: ModalComponent;
+
   validationForm: FormGroup;
+  registerValidationForm: FormGroup;
   authModel: any = {};
+  registerModel: any = {};
   imgUrl = `${environment.apiUrl}/api/createImageCode`;
-  username: string;
 
   constructor(
     public fb: FormBuilder,
@@ -24,7 +29,13 @@ export class LoginComponent implements OnInit {
     this.validationForm = fb.group({
       userFormEx: [null, [Validators.required]],
       passwordFormEx: [null, Validators.required],
-      codeFormEx: [null, Validators.required],
+    });
+    this.registerValidationForm = fb.group({
+      registerUserFormEx: [null, [Validators.required]],
+      registerPasswordFormEx: [null, Validators.required],
+      registerNameFormEx: [null, Validators.required],
+      registerPhoneFormEx: [null, Validators.required],
+      registerEmailFormEx: [null, Validators.required],
     });
   }
 
@@ -36,8 +47,24 @@ export class LoginComponent implements OnInit {
     return this.validationForm.get('passwordFormEx');
   }
 
-  get codeFormEx() {
-    return this.validationForm.get('codeFormEx');
+  get registerUserFormEx() {
+    return this.registerValidationForm.get('registerUserFormEx');
+  }
+
+  get registerNameFormEx() {
+    return this.registerValidationForm.get('registerNameFormEx');
+  }
+
+  get registerPasswordFormEx() {
+    return this.registerValidationForm.get('registerPasswordFormEx');
+  }
+
+  get registerPhoneFormEx() {
+    return this.registerValidationForm.get('registerPhoneFormEx');
+  }
+
+  get registerEmailFormEx() {
+    return this.registerValidationForm.get('registerEmailFormEx');
   }
 
   onSubmit() {
@@ -51,36 +78,31 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.router.navigate(['home']);
-    this.authenticationService.login(this.authModel.username, this.authModel.password, this.authModel.imgCode)
-      .subscribe(result => {
-        // 判断验证码是否输入正确
-        this.username = this.authenticationService.getUserName();
-        const judge = this.authenticationService.isLoggedIn();
-        if (result) {
-          // login successful
-          if (judge) {
+    /*    this.authenticationService.login(this.authModel.username, this.authModel.password, this.authModel.imgCode)
+          .subscribe(result => {
+            // 判断验证码是否输入正确
+            this.username = this.authenticationService.getUserName();
+            const judge = this.authenticationService.isLoggedIn();
+            if (result) {
+              // login successful
+              if (judge) {
 
-          } else {
-            // 验证码输入错误
-            alert('验证码错误');
-          }
+              } else {
+                // 验证码输入错误
+                alert('验证码错误');
+              }
 
-        } else {
-          // login failed
-          alert('Username or password is incorrect');
-        }
-      });
+            } else {
+              // login failed
+              alert('Username or password is incorrect');
+            }
+          });*/
   }
 
-  private log(message: string) {
+  toRegister() {
+    this.register.hide();
+    this.registered.show();
   }
 
-  refresh() {
-    this.imgUrl = this.imgUrl + '?' + Math.random();
-  }
 
-  // 输入正确，确认进入
-  successLogin() {
-    this.router.navigate(['home']);
-  }
 }
