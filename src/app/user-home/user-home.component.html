@@ -1,0 +1,42 @@
+<!-- 顶部导航 -->
+<div class="col m-1">
+  <div class="row ">
+    <div class="col-12">
+      <div class="row aqua-gradient ">
+
+        <div class='ribbon mx-auto mb-2'>
+          <a mdbWavesEffect routerLink="/home/user-info"
+             routerLinkActive="active"><span>个人信息</span></a>
+          <a mdbWavesEffect routerLink="/home/update-password"
+             routerLinkActive="active"><span>修改密码</span></a>
+          <a mdbWavesEffect href='http://www.cqjtu.edu.cn/'><span>学校官网</span></a>
+          <a mdbWavesEffect href="" (click)="logout()"><span>退出登录</span></a>
+        </div>
+        <div class="my-auto">
+          <a nz-dropdown [nzDropdownMenu]="menu">
+            <mdb-badge color="blue" mdbDropdownToggle classInside="dropdown-toggle"
+                       class="waves-effect" mdbWavesEffect>
+              账号 {{userName}} 已登录
+              <nz-badge nzStatus="error"></nz-badge>
+            </mdb-badge>
+          </a>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <a class="dropdown-item" routerLink="/home/user-info"
+               routerLinkActive="active">个人信息</a>
+            <a class="dropdown-item" routerLink="/home/message" routerLinkActive="active">通知
+              <nz-badge [nzCount]="5"></nz-badge>
+            </a>
+            <a class="dropdown-item" routerLink="update-password"
+               routerLinkActive="active">修改密码</a>
+            <div class="divider dropdown-divider"></div>
+            <a class="dropdown-item" href="" (click)="logout()">退出登录</a>
+
+          </nz-dropdown-menu>
+        </div>
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+
+</div>
