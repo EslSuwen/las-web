@@ -3,40 +3,45 @@
   <div class="row ">
     <div class="col-12">
       <div class="row aqua-gradient ">
-
         <div class='ribbon mx-auto mb-2'>
+          <a mdbWavesEffect routerLink="/home/apply"
+             routerLinkActive="active"><span>预约</span></a>
           <a mdbWavesEffect routerLink="/home/user-info"
              routerLinkActive="active"><span>个人信息</span></a>
+          <a mdbWavesEffect routerLink="/home/record"
+             routerLinkActive="active"><span>预约记录</span></a>
           <a mdbWavesEffect routerLink="/home/update-password"
              routerLinkActive="active"><span>修改密码</span></a>
           <a mdbWavesEffect href='http://www.cqjtu.edu.cn/'><span>学校官网</span></a>
           <a mdbWavesEffect href="" (click)="logout()"><span>退出登录</span></a>
         </div>
         <div class="my-auto">
-          <a nz-dropdown [nzDropdownMenu]="menu">
+          <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="nzmenu">
             <mdb-badge color="blue" mdbDropdownToggle classInside="dropdown-toggle"
                        class="waves-effect" mdbWavesEffect>
               账号 {{userName}} 已登录
               <nz-badge nzStatus="error"></nz-badge>
             </mdb-badge>
           </a>
-          <nz-dropdown-menu #menu="nzDropdownMenu">
-            <a class="dropdown-item" routerLink="/home/user-info"
-               routerLinkActive="active">个人信息</a>
-            <a class="dropdown-item" routerLink="/home/message" routerLinkActive="active">通知
-              <nz-badge [nzCount]="5"></nz-badge>
-            </a>
-            <a class="dropdown-item" routerLink="update-password"
-               routerLinkActive="active">修改密码</a>
-            <div class="divider dropdown-divider"></div>
-            <a class="dropdown-item" href="" (click)="logout()">退出登录</a>
-
+          <nz-dropdown-menu #nzmenu="nzDropdownMenu">
+            <ul nz-menu>
+              <li nz-menu-item routerLink="user-info"
+                  routerLinkActive="active">个人信息
+              </li>
+              <li nz-menu-item routerLink="message" routerLinkActive="active">通知
+                <nz-badge [nzCount]="5"></nz-badge>
+              </li>
+              <li nz-menu-divider></li>
+              <li nz-menu-item routerLink="update-password"
+                  routerLinkActive="active">修改密码
+              </li>
+              <li nz-menu-divider></li>
+              <li nz-menu-item (click)="logout()">退出登录</li>
+            </ul>
           </nz-dropdown-menu>
         </div>
       </div>
       <router-outlet></router-outlet>
     </div>
   </div>
-
-
 </div>

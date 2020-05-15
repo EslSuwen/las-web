@@ -1,18 +1,16 @@
 // 用户个人信息类
 export class User {
-  // 教职工号 String tID tid
-  tid: string;
-  // 用户姓名 String tName tname
+  // 工号
+  uid: string;
+  // 用户姓名
   uname: string;
-  // 用户电话 String tPhone tphone
+  // 用户电话 String
   uphone: string;
-  // 用户QQ String tQQ tqq
-  uqq: string;
-  // 用户邮箱 String tEmail temail
+  // 用户邮箱
   uemail: string;
-  // 密码 String tPassword tpassword
+  // 密码
   upassword: string;
-  // 权限（是否为管理员） int tLimit tlimit
+  // 权限（是否为管理员）
   ulimit: number;
 }
 

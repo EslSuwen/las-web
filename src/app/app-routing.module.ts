@@ -3,7 +3,10 @@ import {RouterModule, Routes} from '@angular/router';
 import {Code404Component} from './code404/code404.component';
 import {UserHomeComponent} from './user-home/user-home.component';
 import {LoginComponent} from './login/login.component';
-import {RegisterComponent} from './register/register.component';
+import {UpdatePasswordComponent} from './user-home/update-password/update-password.component';
+import {UserInfoComponent} from './user-home/user-info/user-info.component';
+import {RecordComponent} from './user-home/record/record.component';
+import {ApplyComponent} from './user-home/apply/apply.component';
 
 
 const routes: Routes = [
@@ -13,9 +16,22 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
   // canActivate: [CanActivateAuthGuard],
-  {path: 'home', component: UserHomeComponent},
+  {
+    path: 'home', component: UserHomeComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: '/home/apply',
+        pathMatch: 'full'
+      },
+      {path: 'apply', component: ApplyComponent},
+      {path: 'user-info', component: UserInfoComponent},
+      {path: 'update-password', component: UpdatePasswordComponent},
+      {path: 'record', component: RecordComponent},
+      {path: '**', component: Code404Component}
+    ],
+  },
   {path: '**', component: Code404Component}
 ];
 

@@ -6,7 +6,6 @@ import {AppComponent} from './app.component';
 import {Code404Component} from './code404/code404.component';
 import {LoginComponent} from './login/login.component';
 import {UserHomeComponent} from './user-home/user-home.component';
-import {RegisterComponent} from './register/register.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -14,8 +13,13 @@ import {NZ_I18N, zh_CN} from 'ng-zorro-antd/i18n';
 import {registerLocaleData} from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
-import {NgZorroAntdModule, NzBadgeModule, NzDropDownModule, NzIconModule} from 'ng-zorro-antd';
-import { ModalComponent } from './modal/modal.component';
+import {NzBadgeModule, NzDropDownModule, NzIconModule} from 'ng-zorro-antd';
+import {ModalComponent} from './modal/modal.component';
+import {UpdatePasswordComponent} from './user-home/update-password/update-password.component';
+import {UserInfoComponent} from './user-home/user-info/user-info.component';
+import {ApplyComponent} from './user-home/apply/apply.component';
+import {RecordComponent} from './user-home/record/record.component';
+import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
 
 registerLocaleData(zh);
 
@@ -25,8 +29,11 @@ registerLocaleData(zh);
     Code404Component,
     LoginComponent,
     UserHomeComponent,
-    RegisterComponent,
-    ModalComponent
+    ModalComponent,
+    UpdatePasswordComponent,
+    UserInfoComponent,
+    ApplyComponent,
+    RecordComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +45,8 @@ registerLocaleData(zh);
     ReactiveFormsModule,
     NzDropDownModule,
     NzBadgeModule,
-    NzIconModule
+    NzIconModule,
+    AngularMultiSelectModule
   ],
   providers: [{provide: NZ_I18N, useValue: zh_CN}],
   bootstrap: [AppComponent]
