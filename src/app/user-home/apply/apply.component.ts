@@ -11,126 +11,109 @@ export class ApplyComponent implements OnInit {
 
   @ViewChild('frame', {static: true}) frame: ModalComponent;
 
+  applyModel: any = {
+    campus: '', labName: '', deviceName: '', deviceNum: '', tutor: '',
+    startTime: '', overTime: '', ps: ''
+  };
+
+  isLabSelected = true;
+  isDeviceSelected = true;
 
   // status: number;
   status = 0;
   feedback = 2;
-  // 周次
-  weekList = [];
-  weekSelected = [];
-  weekSettings = {};
-  // 星期
-  dayList = [];
-  daySelected = [];
-  daySettings = {};
-  // 节次
-  timeList = [];
-  timeSelected = [];
-  timeSettings = {};
-  // 校区
-  regionList = [];
-  regionSelected = [];
-  regionSettings = {};
-  // 班级
-  classList = [];
-  classSelected = [];
-  classSettings = {};
-  // 年级
-  gradeList = [];
-  gradeSelected = [];
-  gradeSettings = {};
 
-  beizhu: FormControl;
+  // 实验室
+  labList = [];
+  labSelected: string;
+  labSettings = {};
+  // 设备数量
+  deviceNumList = [];
+  deviceNumSelected: string;
+  deviceNumSettings = {};
+  // 校区
+  campusList = [];
+  campusSelected = [];
+  campusSettings = {};
+  // 设备
+  deviceList = [];
+  deviceSelected: string;
+  deviceSettings = {};
+  // 导师
+  tutorList = [];
+  tutorSelected: string;
+  tutorSettings = {};
+
+  psFormControl: FormControl;
 
   constructor() {
   }
 
   ngOnInit(): void {
 
-    this.beizhu = new FormControl();
+    this.psFormControl = new FormControl();
 
-    this.weekList = [
-      {id: 1, itemName: '第一周'},
-      {id: 2, itemName: '第二周'},
-      {id: 3, itemName: '第三周'},
-      {id: 4, itemName: '第四周'},
-      {id: 5, itemName: '第五周'},
-      {id: 6, itemName: '第六周'},
-      {id: 7, itemName: '第七周'},
-      {id: 8, itemName: '第八周'},
-      {id: 9, itemName: '第九周'},
-      {id: 10, itemName: '第十周'},
-      {id: 11, itemName: '十一周'},
-      {id: 12, itemName: '十二周'},
-      {id: 13, itemName: '十三周'},
-      {id: 14, itemName: '十四周'},
-      {id: 15, itemName: '十五周'},
-      {id: 16, itemName: '十六周'},
-      {id: 17, itemName: '十七周'},
-      {id: 18, itemName: '十八周'},
-      {id: 19, itemName: '十九周'},
-      {id: 20, itemName: '二十周'},
+
+    this.labList = [
+      {id: '0', itemName: '未找到实验室'},
+      {id: '1', itemName: '实验室1'},
+      {id: '2', itemName: '实验室2'},
+      {id: '3', itemName: '实验室3'},
+      {id: '4', itemName: '实验室4'},
+      {id: '5', itemName: '实验室5'},
+      {id: '6', itemName: '实验室6'},
+      {id: '7', itemName: '实验室7'},
     ];
-    this.weekSettings = {
+    this.labSettings = {
       badgeShowLimit: 2,
-      singleSelection: false, // 是否单选
-      text: '选择周次',
-      enableCheckAll: true, // 是否可以全选
-      selectAllText: '全选',
-      unSelectAllText: '全不选',
-      enableSearchFilter: false, // 查找过滤器
-      // showCheckbox: false,
-      // enableFilterSelectAll: true, // “全选”复选框可以选择所有过滤结果
-      // limitSelection 选择个数的限制
-      // searchPlaceholderText 搜索的默认文字
-    };
-    this.dayList = [
-      {id: '1', itemName: '星期一'},
-      {id: '2', itemName: '星期二'},
-      {id: '3', itemName: '星期三'},
-      {id: '4', itemName: '星期四'},
-      {id: '5', itemName: '星期五'},
-      {id: '6', itemName: '星期六'},
-      {id: '7', itemName: '星期天'},
-    ];
-    this.daySettings = {
-      badgeShowLimit: 2,
-      singleSelection: false, // 是否单选
-      text: '选择星期',
-      enableCheckAll: true, // 是否可以全选
-      selectAllText: '全选',
-      unSelectAllText: '全不选',
-      enableSearchFilter: false, // 查找过滤器
-      // showCheckbox: false,
-      // enableFilterSelectAll: true, // “全选”复选框可以选择所有过滤结果
-      // limitSelection: 5,
-      // searchPlaceholderText 搜索的默认文字
-    };
-    this.timeList = [
-      {id: '1', itemName: '上午第一节'},
-      {id: '2', itemName: '上午第二节'},
-      {id: '3', itemName: '下午第一节'},
-      {id: '4', itemName: '下午第二节'},
-      {id: '5', itemName: '晚上第一节'},
-      {id: '6', itemName: '晚上第二节'},
-    ];
-    this.timeSettings = {
       singleSelection: true, // 是否单选
-      text: '选择节次',
-      // enableCheckAll: true, // 是否可以全选
-      // selectAllText: '全选',
-      // unSelectAllText: '全不选',
-      enableSearchFilter: false, // 查找过滤器
+      text: '选择实验室',
+      enableCheckAll: false, // 是否可以全选
+      enableSearchFilter: true, // 查找过滤器
       // showCheckbox: false,
       // enableFilterSelectAll: true, // “全选”复选框可以选择所有过滤结果
       // limitSelection: 5,
       // searchPlaceholderText 搜索的默认文字
     };
-    this.regionList = [
+    this.deviceList = [
+      {id: '0', itemName: '无'},
+      {id: '1', itemName: '未找到设备'},
+      {id: '2', itemName: '设备2'},
+      {id: '3', itemName: '设备3'},
+      {id: '4', itemName: '设备4'},
+      {id: '5', itemName: '设备5'},
+      {id: '6', itemName: '设备6'},
+      {id: '7', itemName: '设备7'},
+    ];
+    this.deviceSettings = {
+      badgeShowLimit: 2,
+      singleSelection: true, // 是否单选
+      text: '选择设备',
+      enableCheckAll: false, // 是否可以全选
+      enableSearchFilter: true, // 查找过滤器
+      // showCheckbox: false,
+      // enableFilterSelectAll: true, // “全选”复选框可以选择所有过滤结果
+      // limitSelection: 5,
+      // searchPlaceholderText 搜索的默认文字
+    };
+    this.deviceNumList = [
+      {id: '1', itemName: '0'},
+      {id: '2', itemName: '1'},
+      {id: '3', itemName: '2'},
+      {id: '4', itemName: '3'},
+      {id: '5', itemName: '4'},
+      {id: '6', itemName: '5'},
+    ];
+    this.deviceNumSettings = {
+      singleSelection: true, // 是否单选
+      text: '选择设备数量',
+      enableSearchFilter: false, // 查找过滤器
+    };
+    this.campusList = [
       {id: '1', itemName: '双福校区'},
       {id: '2', itemName: '南岸校区'},
     ];
-    this.regionSettings = {
+    this.campusSettings = {
       singleSelection: true, // 是否单选
       text: '选择校区',
       // enableCheckAll: true, // 是否可以全选
@@ -142,61 +125,60 @@ export class ApplyComponent implements OnInit {
       // limitSelection: 5,
       // searchPlaceholderText 搜索的默认文字
     };
-    const date = new Date();
-    this.gradeList = [
-      {id: '1', itemName: date.getFullYear()}, // 20
-      {id: '2', itemName: date.getFullYear() - 1}, // 19
-      {id: '3', itemName: date.getFullYear() - 2}, // 18
-      {id: '4', itemName: date.getFullYear() - 3}, // 17
-      {id: '4', itemName: date.getFullYear() - 4}, // 16
-
+    this.tutorList = [
+      {id: '0', itemName: '导师0'},
+      {id: '1', itemName: '导师1'},
+      {id: '2', itemName: '导师2'},
+      {id: '3', itemName: '导师3'},
+      {id: '4', itemName: '导师4'},
+      {id: '5', itemName: '导师5'},
     ];
-    this.gradeSettings = {
+    this.tutorSettings = {
       singleSelection: true, // 是否单选
-      text: '选择年级',
-      // enableCheckAll: true, // 是否可以全选
-      // selectAllText: '全选',
-      // unSelectAllText: '全不选',
-      enableSearchFilter: false, // 查找过滤器
-      // showCheckbox: false,
-      // enableFilterSelectAll: true, // “全选”复选框可以选择所有过滤结果
-      // limitSelection: 5,
-      // searchPlaceholderText 搜索的默认文字
+      text: '选择导师',
+      enableSearchFilter: true, // 查找过滤器
     };
-    this.classList = [
-      {id: '1', itemName: '计算机1班'},
-      {id: '2', itemName: '计算机2班'},
-      {id: '3', itemName: '计算机3班'},
-      {id: '4', itemName: '计算机4班'},
-      {id: '5', itemName: '物联网1班'},
-      {id: '6', itemName: '物联网2班'},
-      {id: '7', itemName: '电子信息1班'},
-      {id: '8', itemName: '电子信息2班'},
-      {id: '9', itemName: '电子信息3班'},
-      {id: '10', itemName: '电子信息4班'},
-      {id: '11', itemName: '电子信息5班'},
-      {id: '12', itemName: '电子信息6班'},
-      {id: '13', itemName: '曙光班'},
-    ];
-    this.classSettings = {
-      badgeShowLimit: 2,
-      singleSelection: false, // 是否单选
-      text: '选择班级',
-      enableCheckAll: true, // 是否可以全选
-      selectAllText: '全选',
-      unSelectAllText: '全不选',
-      enableSearchFilter: false, // 查找过滤器
-      // showCheckbox: false,
-      // enableFilterSelectAll: true, // “全选”复选框可以选择所有过滤结果
-      // limitSelection: 5,
-      // searchPlaceholderText 搜索的默认文字
-    };
+
+    const date = new Date();
 
     this.frame.show();
   }
 
-  submit() {
+  onLabSelected(item: any) {
+    if (item.itemName === '未找到实验室') {
+      this.isLabSelected = false;
+      this.applyModel.labName = '';
+    } else {
+      this.isLabSelected = true;
+      this.applyModel.labName = item.itemName;
+    }
 
+  }
+
+  onDeviceSelected(item: any) {
+    if (item.itemName === '未找到设备') {
+      this.isDeviceSelected = false;
+      this.applyModel.deviceName = '';
+    } else {
+      this.isDeviceSelected = true;
+      this.applyModel.deviceName = item.itemName;
+    }
+  }
+
+  onDeviceNumSelected(item: any) {
+    this.applyModel.deviceNum = item.itemName;
+  }
+
+  onCampusSelected(item: any) {
+    this.applyModel.campus = item.itemName;
+  }
+
+  onTutorSelected(item: any) {
+    this.applyModel.tutor = item.itemName;
+  }
+
+  submit() {
+    console.log(this.applyModel);
   }
 
 }

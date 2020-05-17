@@ -1,8 +1,8 @@
-<div class="col-lg-5 mt-5 mx-auto">
+<div class="col-lg-10 mt-5 mx-auto">
   <mdb-card cascade="true" narrower="true">
     <!--Card image-->
     <div
-      class="view view-cascade gradient-card-header blue-gradient narrower z-depth-2 rounded-lg  py-2 m-3 mt-n4 text-center">
+      class="view view-cascade gradient-card-header purple-gradient narrower z-depth-2 rounded-lg  py-2 m-3 mt-n4 text-center">
       <div class="m-3">
         <h4 class="white-text">申请情况一览</h4>
       </div>
@@ -11,7 +11,7 @@
     <table class="table table-striped table-responsive-md btn-table">
       <thead>
       <tr>
-        <th>项目编号</th>
+        <th>序号</th>
         <th>实验课程名称</th>
         <th>申请状态</th>
         <th>备注</th>
@@ -20,25 +20,35 @@
       </thead>
       <tbody>
       <tr *ngFor="let each of data;let i = index">
-
-        <td>{{each.no}}</td>
+        <td>{{i + 1}}</td>
         <td>{{each.expCname}}</td>
-
-        <td [ngSwitch]="each.status">
-          <button type="button" class="btn btn-outline-success disabled btn-sm m-0 waves-effect" *ngSwitchCase="1">
-            已通过
-          </button>
-          <button type="button" class="btn btn-outline-warning disabled btn-sm m-0 waves-effect" *ngSwitchCase="2">
-            审核中
-          </button>
-          <button type="button" class="btn btn-outline-danger disabled btn-sm m-0 waves-effect" *ngSwitchCase="0">已拒绝
-          </button>
+        <td>
+          <label [ngSwitch]="each.status"><label>导师：</label>
+            <button type="button" class="btn btn-outline-success disabled btn-sm" *ngSwitchCase="1">
+              已通过
+            </button>
+            <button type="button" class="btn btn-outline-warning disabled btn-sm" *ngSwitchCase="2">
+              审核中
+            </button>
+            <button type="button" class="btn btn-outline-danger disabled btn-sm" *ngSwitchCase="0">已拒绝
+            </button>
+          </label>
+          <label [ngSwitch]="each.status"><label>管理员：</label>
+            <button type="button" class="btn btn-outline-success disabled btn-sm" *ngSwitchCase="1">
+              已通过
+            </button>
+            <button type="button" class="btn btn-outline-warning disabled btn-sm" *ngSwitchCase="2">
+              审核中
+            </button>
+            <button type="button" class="btn btn-outline-danger disabled btn-sm" *ngSwitchCase="0">已拒绝
+            </button>
+          </label>
         </td>
         <td>{{each.ps}}</td>
         <td>
-          <button mdbBtn type="button" class="btn btn-indigo btn-sm m-0 ">删除记录
+          <button mdbBtn type="button" class="btn btn-deep-orange btn-sm">删除
           </button>
-          <button mdbBtn type="button" class="btn btn-indigo btn-sm m-0">重新申请
+          <button mdbBtn type="button" class="btn btn-indigo btn-sm" *ngIf="each.status==2">修改
           </button>
         </td>
         <!--/.Content-->
