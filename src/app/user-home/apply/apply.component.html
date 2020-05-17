@@ -1,115 +1,3 @@
-<div mdbModal #frame="mdbModal" class="modal fade right"
-     id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-notify modal-info" role="document">
-    <!--Content-->
-    <div class="modal-content ">
-      <!--Header-->
-      <div class="modal-header d-flex justify-content-center text-center">
-        <mdb-icon fas icon="bell" size="2x" class="animated rotateIn mr-1 deep-purple-text"></mdb-icon>
-        <p class="heading">请填写预约信息！</p>
-      </div>
-
-      <!--Body-->
-      <div class="modal-body">
-        <div class="row">
-          <!-- 校区 -->
-          <div class="col px-0 mr-3">
-            <angular2-multiselect [data]="campusList" [(ngModel)]="campusSelected"
-                                  [settings]="campusSettings">
-              <c-item>
-                <ng-template let-item="item">
-                  <label style="min-width: 60%;">{{item.itemName}}</label>
-                </ng-template>
-              </c-item>
-            </angular2-multiselect>
-          </div>
-          <!-- 星期 -->
-          <div class="col  px-0">
-            <div class="md-form">
-              <input type="date" id="formData" class="form-control">
-              <label for="formData">开始时间</label>
-            </div>
-            <!--<angular2-multiselect [data]="dayList" [(ngModel)]="daySelected" [settings]="daySettings">
-              <c-item>
-                <ng-template let-item="item">
-                  <label style="min-width: 60%;">{{item.itemName}}</label>
-                </ng-template>
-              </c-item>
-            </angular2-multiselect>-->
-          </div>
-        </div>
-
-        <!--
-                <div class="row my-4">
-                  &lt;!&ndash; 节次 &ndash;&gt;
-                  <div class="col px-0 mr-3">
-                    <angular2-multiselect [data]="timeList" [(ngModel)]="timeselectedItems"
-                                          [settings]="timeSettings">
-                      <c-item>
-                        <ng-template let-item="item">
-                          <label style="min-width: 60%;">{{item.itemName}}</label>
-                        </ng-template>
-                      </c-item>
-                    </angular2-multiselect>
-                  </div>
-                  &lt;!&ndash; 星期 &ndash;&gt;
-                  <div class="col px-0">
-                    <angular2-multiselect [data]="weekList" [(ngModel)]="weekselectedItems"
-                                          [settings]="weekSettings">
-                      <c-item>
-                        <ng-template let-item="item">
-                          <label style="min-width: 60%;">{{item.itemName}}</label>
-                        </ng-template>
-                      </c-item>
-                    </angular2-multiselect>
-
-                  </div>
-
-                </div>
-                <div class="row">
-                  &lt;!&ndash; 年级 &ndash;&gt;
-                  <div class="col px-0 mr-3">
-                    <angular2-multiselect [data]="gradeList" [(ngModel)]="gradeselectedItems"
-                                          [settings]="gradeSettings">
-                      <c-item class="red">
-                        <ng-template let-item="item">
-                          <label style="min-width: 60%;">{{item.itemName}}</label>
-                        </ng-template>
-                      </c-item>
-                    </angular2-multiselect>
-                  </div>
-                  &lt;!&ndash; 班级 &ndash;&gt;
-                  <div class="col px-0 ">
-                    <angular2-multiselect [data]="classList" [(ngModel)]="classselectedItems"
-                                          [settings]="classSettings">
-
-                    </angular2-multiselect>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col z-depth-1 my-4">
-                    <div class="md-form">
-                      <mdb-icon fas icon="pencil-alt" class="prefix "></mdb-icon>
-                      <textarea type="text" id="form8" class="md-textarea form-control hight1" mdbInput
-                                [formControl]="beizhu"></textarea>
-                      <label for="form8">备注.....</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-        -->
-
-        <!--Footer-->
-        <div class="modal-footer justify-content-center">
-          <a type="button" mdbBtn color="primary" class="waves-light" (click)="submit()">提交</a>
-          <a type="button" mdbBtn color="primary" outline="true" class="waves-light" data-dismiss="modal"
-             (click)="frame.hide()">返回</a>
-        </div>
-      </div>
-      <!--/.Content-->
-    </div>
-  </div>
-</div>
 <!--Section heading-->
 <div class="row animated fadeInRight">
   <!--Grid column-->
@@ -205,24 +93,28 @@
               </c-item>
             </angular2-multiselect>
           </div>
+          <!--日期-->
           <div class="col">
+            <div class="md-form">
+              <input type="date" id="formDate" class="form-control" [(ngModel)]="applyModel.date">
+              <label for="formDate">日期</label>
+            </div>
           </div>
         </div>
-
 
         <div class="row px-20">
           <!--开始时间-->
           <div class="col">
             <div class="md-form">
-              <input type="date" id="formStart" class="form-control" [(ngModel)]="applyModel.startTime">
+              <input type="time" id="formStart" class="form-control" [(ngModel)]="applyModel.startTime">
               <label for="formStart">开始时间</label>
             </div>
           </div>
           <!--结束时间-->
           <div class="col">
             <div class="md-form">
-              <input type="date" id="formOver" class="form-control" [(ngModel)]="applyModel.overTime">
-              <label for="formOver">开始时间</label>
+              <input type="time" id="formOver" class="form-control" [(ngModel)]="applyModel.overTime">
+              <label for="formOver">结束时间</label>
             </div>
           </div>
         </div>
@@ -231,7 +123,7 @@
           <div class="col z-depth-1 my-4 ">
             <div class="md-form px">
               <mdb-icon fas icon="pencil-alt" class="prefix "></mdb-icon>
-              <textarea type="text" id="form8" class="md-textarea form-control hight1" [(ngModel)]="applyModel.ps"
+              <textarea type="text" id="form8" class="md-textarea form-control" [(ngModel)]="applyModel.ps"
                         mdbInput
                         [formControl]="psFormControl"></textarea>
               <label for="form8">备注.....</label>
@@ -240,30 +132,6 @@
         </div>
 
 
-        <!--        <div class="md-form">
-                  <mdb-icon fas icon="key" class="prefix blue-text"></mdb-icon>
-                  <input mdbInput type="password" id="form22" class="form-control" minlength="4" maxlength="16"
-                         [(ngModel)]="oldPw">
-                  <label for="form22">原始密码</label>
-                  <mdb-error *ngIf="oldPw==''||oldPw.length<3" class="mt-0">请输入原密码</mdb-error>
-                </div>
-
-                <div class="md-form">
-                  <mdb-icon fas icon="key" class="prefix blue-text"></mdb-icon>
-                  <input mdbInput type="password" id="form2" class="form-control" minlength="4" maxlength="16"
-                         [(ngModel)]="newPw">
-                  <label for="form2">新密码(4-16个字符)</label>
-                  <mdb-error *ngIf="newPw==''||newPw.length<4" class="mt-0">密码强度太低</mdb-error>
-                </div>
-
-                <div class="md-form">
-                  <mdb-icon fas icon="key" class="prefix"></mdb-icon>
-                  <input mdbInput type="password" id="form32" class="form-control" minlength="4" maxlength="16"
-                         [(ngModel)]="newPw1">
-                  <label for="form32">确认新密码</label>
-                  <mdb-error *ngIf="!isSamePwd()" class="mt-0">两次输入密码不相同
-                  </mdb-error>
-                </div>-->
         <!-- Regular usage -->
         <!-- <re-captcha (resolved)="resolved($event)" siteKey="YOUR_SITE_KEY"></re-captcha> -->
 
@@ -292,7 +160,7 @@
       <!--Header-->
       <div class="modal-header d-flex justify-content-center">
         <p *ngIf="feedback==-1" class="heading">原密码输入错误！</p>
-        <p *ngIf="feedback==0" class="heading">修改失败！</p>
+        <p *ngIf="feedback==0" class="heading">预约失败！</p>
         <p *ngIf="feedback==2" class="heading">意料之外的错误！</p>
       </div>
       <!--Footer-->
@@ -300,7 +168,7 @@
         <a type="button" mdbBtn color="danger" outline="true" class="waves-light" mdbWavesEffect data-dismiss="modal"
            (click)="failModal.hide()">确定</a>
       </div>
-      <strong>若一直修改不了请联系管理员</strong>
+      <strong>若一直预约不了请联系管理员</strong>
     </div>
     <!--/.Content-->
   </div>
@@ -312,12 +180,13 @@
     <div class="modal-content text-center">
       <!--Header-->
       <div class="modal-header d-flex justify-content-center">
-        <p class="heading">修改成功，请重新登录！</p>
+        <p class="heading">预约成功！</p>
       </div>
       <!--Footer-->
       <div class="modal-footer justify-content-center">
         <a type="button" mdbBtn color="success" outline="true" class="waves-light" mdbWavesEffect data-dismiss="modal"
-           (click)="successModal.hide();submit()">确定</a>
+           routerLink="/home/record"
+           (click)="successModal.hide();">确定</a>
       </div>
     </div>
     <!--/.Content-->

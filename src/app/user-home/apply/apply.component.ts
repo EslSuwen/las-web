@@ -10,10 +10,12 @@ import {ModalComponent} from '../../modal/modal.component';
 export class ApplyComponent implements OnInit {
 
   @ViewChild('frame', {static: true}) frame: ModalComponent;
+  @ViewChild('successModal', {static: true}) successModal: ModalComponent; // 预约成功模态
+  @ViewChild('failModal', {static: true}) failModal: ModalComponent; // 预约失败的模态
 
   applyModel: any = {
     campus: '', labName: '', deviceName: '', deviceNum: '', tutor: '',
-    startTime: '', overTime: '', ps: ''
+    date: '', startTime: '', overTime: '', ps: ''
   };
 
   isLabSelected = true;
@@ -91,10 +93,6 @@ export class ApplyComponent implements OnInit {
       text: '选择设备',
       enableCheckAll: false, // 是否可以全选
       enableSearchFilter: true, // 查找过滤器
-      // showCheckbox: false,
-      // enableFilterSelectAll: true, // “全选”复选框可以选择所有过滤结果
-      // limitSelection: 5,
-      // searchPlaceholderText 搜索的默认文字
     };
     this.deviceNumList = [
       {id: '1', itemName: '0'},
@@ -179,6 +177,7 @@ export class ApplyComponent implements OnInit {
 
   submit() {
     console.log(this.applyModel);
+    this.successModal.show();
   }
 
 }

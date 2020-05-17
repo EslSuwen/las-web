@@ -16,7 +16,8 @@ export class UserHomeComponent implements OnInit {
 
   ngOnInit() {
 
-    this.userName = this.authenticationService.getUserName();
+    // this.userName = this.authenticationService.getUserName();
+    this.userName = 'username';
 
   }
 
