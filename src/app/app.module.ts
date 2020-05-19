@@ -20,6 +20,8 @@ import {UserInfoComponent} from './user-home/user-info/user-info.component';
 import {ApplyComponent} from './user-home/apply/apply.component';
 import {RecordComponent} from './user-home/record/record.component';
 import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
+import { AuditComponent } from './user-home/audit/audit.component';
+import { AuditRecordComponent } from './user-home/audit-record/audit-record.component';
 
 registerLocaleData(zh);
 
@@ -34,6 +36,8 @@ registerLocaleData(zh);
     UserInfoComponent,
     ApplyComponent,
     RecordComponent,
+    AuditComponent,
+    AuditRecordComponent,
   ],
   imports: [
     BrowserModule,

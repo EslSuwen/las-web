@@ -14,8 +14,8 @@ export class ApplyComponent implements OnInit {
   @ViewChild('failModal', {static: true}) failModal: ModalComponent; // 预约失败的模态
 
   applyModel: any = {
-    campus: '', labName: '', deviceName: '', deviceNum: '', tutor: '',
-    date: '', startTime: '', overTime: '', ps: ''
+    no: '', campus: '', labName: '', deviceName: '', deviceNum: '', tutor: '',
+    date: '', startTime: '', overTime: '', ps: '', status: 2
   };
 
   isLabSelected = true;

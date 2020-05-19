@@ -14,15 +14,17 @@ export class RecordComponent implements OnInit {
   @ViewChild('updateModal', {static: true}) updateModal: ModalComponent; // 修改的模态
 
 
-  data: any = {};
+  data: any = [];
   feedback = 0;
   removeNo: number;
 
 
-  applyModel: any = {
-    campus: '南岸校区', labName: '实验室1', deviceName: '设备2', deviceNum: '4', tutor: '导师3',
+  updateModel: any = {
+    no: '', campus: '南岸校区', labName: '实验室1', deviceName: '设备2', deviceNum: '4', tutor: '导师3',
     date: '2020-5-25', startTime: '13:00', overTime: '15:00', ps: '这是预约备注。'
   };
+  isEdit = false;
+
   isLabSelected = true;
   isDeviceSelected = true;
   // 实验室
@@ -52,13 +54,26 @@ export class RecordComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.data = [
-      {no: 1, expCname: '实验课程名', status: 0, ps: '备注'},
-      {no: 2, expCname: '实验课程名', status: 1, ps: '备注'},
-      {no: 3, expCname: '实验课程名', status: 2, ps: '备注'},
-      {no: 4, expCname: '实验课程名', status: 0, ps: '备注'},
-      {no: 5, expCname: '实验课程名', status: 1, ps: '备注12333'},
-    ];
+    this.data.push({
+      no: '1', campus: '南岸校区', labName: '实验室1', deviceName: '设备5', deviceNum: '1', tutor: '导师1',
+      date: '2020-05-21', startTime: '13:00', overTime: '15:00', ps: '这是预约备注。', status: 0
+    });
+    this.data.push({
+      no: '2', campus: '南岸校区', labName: '实验室2', deviceName: '设备6', deviceNum: '3', tutor: '导师2',
+      date: '2020-05-22', startTime: '13:00', overTime: '15:00', ps: '这是预约备注。', status: 1
+    });
+    this.data.push({
+      no: '3', campus: '南岸校区', labName: '实验室1', deviceName: '设备2', deviceNum: '4', tutor: '导师3',
+      date: '2020-05-25', startTime: '13:00', overTime: '15:00', ps: '这是预约备注。', status: 2
+    });
+    this.data.push({
+      no: '4', campus: '南岸校区', labName: '实验室3', deviceName: '设备1', deviceNum: '2', tutor: '导师4',
+      date: '2020-05-23', startTime: '13:00', overTime: '15:00', ps: '这是预约备注。', status: 0
+    });
+    this.data.push({
+      no: '5', campus: '南岸校区', labName: '实验室3', deviceName: '设备2', deviceNum: '4', tutor: '导师5',
+      date: '2020-05-26', startTime: '13:00', overTime: '15:00', ps: '这是预约备注。', status: 2
+    });
 
     this.labList = [
       {id: '0', itemName: '未找到实验室'},
@@ -150,10 +165,10 @@ export class RecordComponent implements OnInit {
   onLabSelected(item: any) {
     if (item.itemName === '未找到实验室') {
       this.isLabSelected = false;
-      this.applyModel.labName = '';
+      this.updateModel.labName = '';
     } else {
       this.isLabSelected = true;
-      this.applyModel.labName = item.itemName;
+      this.updateModel.labName = item.itemName;
     }
 
   }
@@ -161,23 +176,23 @@ export class RecordComponent implements OnInit {
   onDeviceSelected(item: any) {
     if (item.itemName === '未找到设备') {
       this.isDeviceSelected = false;
-      this.applyModel.deviceName = '';
+      this.updateModel.deviceName = '';
     } else {
       this.isDeviceSelected = true;
-      this.applyModel.deviceName = item.itemName;
+      this.updateModel.deviceName = item.itemName;
     }
   }
 
   onDeviceNumSelected(item: any) {
-    this.applyModel.deviceNum = item.itemName;
+    this.updateModel.deviceNum = item.itemName;
   }
 
   onCampusSelected(item: any) {
-    this.applyModel.campus = item.itemName;
+    this.updateModel.campus = item.itemName;
   }
 
   onTutorSelected(item: any) {
-    this.applyModel.tutor = item.itemName;
+    this.updateModel.tutor = item.itemName;
   }
 
   toRemove(no: number) {
@@ -197,28 +212,49 @@ export class RecordComponent implements OnInit {
 
   toUpdate(no: number) {
 
+    console.log(no);
+
+    for (const each of this.data) {
+      if (each.no === no) {
+        this.updateModel.no = each.no;
+        this.updateModel.campus = each.campus;
+        this.updateModel.labName = each.labName;
+        this.updateModel.deviceName = each.deviceName;
+        this.updateModel.deviceNum = each.deviceNum;
+        this.updateModel.date = each.date;
+        this.updateModel.tutor = each.tutor;
+        this.updateModel.startTime = each.startTime;
+        this.updateModel.overTime = each.overTime;
+        this.updateModel.status = each.status;
+        this.updateModel.ps = each.ps;
+        break;
+      }
+    }
+
+    console.log(this.updateModel);
+
     for (const each of this.campusList) {
-      if (each.itemName === this.applyModel.campus) {
+      if (each.itemName === this.updateModel.campus) {
         this.campusSelected = [{id: each.id, itemName: each.itemName}];
       }
     }
     for (const each of this.labList) {
-      if (each.itemName === this.applyModel.labName) {
+      if (each.itemName === this.updateModel.labName) {
         this.labSelected = [{id: each.id, itemName: each.itemName}];
       }
     }
     for (const each of this.deviceList) {
-      if (each.itemName === this.applyModel.deviceName) {
+      if (each.itemName === this.updateModel.deviceName) {
         this.deviceSelected = [{id: each.id, itemName: each.itemName}];
       }
     }
     for (const each of this.deviceNumList) {
-      if (each.itemName === this.applyModel.deviceNum) {
+      if (each.itemName === this.updateModel.deviceNum) {
         this.deviceNumSelected = [{id: each.id, itemName: each.itemName}];
       }
     }
     for (const each of this.tutorList) {
-      if (each.itemName === this.applyModel.tutor) {
+      if (each.itemName === this.updateModel.tutor) {
         this.tutorSelected = [{id: each.id, itemName: each.itemName}];
       }
     }
@@ -226,7 +262,12 @@ export class RecordComponent implements OnInit {
   }
 
   update() {
+    this.isEdit = false;
     this.successModal.show();
+  }
+
+  onEdit() {
+    this.isEdit = true;
   }
 
 }
